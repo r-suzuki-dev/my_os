@@ -1,3 +1,5 @@
 *.o
-kzload*
-h8write
+src/bootload/kzload*
+tools/h8write/**
+!tools/h8write/*.*
+

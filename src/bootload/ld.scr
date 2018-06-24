@@ -1,0 +1,35 @@
+/*  The linker script defines the memory layout of executable files
+ *  created by compiling (that is, memory map).
+ */
+
+/* OUTPUT_FORMAT("elf32-h8300") */
+OUTPUT_ARCH(h8300h)
+ENTRY("_start")
+
+SECTIONS
+{
+    . = 0x0;               /* Arrange from the start address of memory */
+
+    .vectors : {           /* Interrupt vector */
+        vector.o(.data)
+    }
+
+    .text : {              /* Text area */
+        *(.text)
+    }
+
+    .rodata : {            /* Read Only Data area */
+        *(.strings)
+        *(.rodata)
+        *(.rodata.*)
+    }
+
+    .data : {              /* Data area */
+        *(.data)
+    }
+
+    .bss : {               /* BSS area */
+        *(.bss)
+        *(COMMON)
+    }
+}
